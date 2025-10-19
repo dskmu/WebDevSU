@@ -1,0 +1,54 @@
+﻿
+@model WEBKA.Models.LoginVm
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Log in";
+}
+
+<section class="hero-section auth-page">
+    <div class="container">
+        <div class="w-layout-layout _5rem-margin-grid wf-layout-layout">
+            <div class="w-layout-cell column">
+                <h1 class="heading">Welcome <span class="emphasized-heading">Back</span></h1>
+                <p>Log in to your account to continue.</p>
+            </div>
+
+            <div class="w-layout-cell column">
+                <div class="form-block w-form">
+                    <form asp-action="Login" method="post" class="auth-form w-clearfix">
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <label asp-for="Email" class="field-label"></label>
+                        <input asp-for="Email"
+                               class="text-input w-input"
+                               placeholder="Email address" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                        <label asp-for="Password" class="field-label"></label>
+                        <input asp-for="Password"
+                               class="text-input w-input" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                        <div class="w-layout-hflex horizontal-flex" style="align-items:center; gap:.5rem; margin:.5rem 0 1rem;">
+                            <input asp-for="RememberMe" class="w-checkbox-input" style="width:18px;height:18px;margin:0;" />
+                            <label asp-for="RememberMe" class="dark-text small-text" style="margin:0;"></label>
+                        </div>
+
+                        <div class="w-layout-hflex horizontal-flex center-aligned">
+                            <button type="submit" class="primary-button red w-button">Log in</button>
+
+                            <a asp-action="Register" class="dark-text small-text" style="margin-left:1rem;">
+                                Need an account? Create one
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="w-form-done"><div>Success!</div></div>
+                    <div class="w-form-fail"><div>Something went wrong.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

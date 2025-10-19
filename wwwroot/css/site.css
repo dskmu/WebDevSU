@@ -1,0 +1,72 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* ”ƒјЋя≈ћ лишний Ђхвостї от шаблона */
+body {
+    /* margin-bottom: 60px; */ /* больше не надо */
+}
+
+/* ‘иксированна€ шапка поверх hero, пр€четс€ при скролле вниз (десктоп) */
+@media (max-width: 991.98px) {
+    .top-nav {
+        position: sticky; /* остаЄтс€ у верха */
+        top: 0;
+        z-index: 1000;
+        background: #1e6c68; /* твой фирменный фон шапки */
+        box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+
+        /* внутренние отступы на мобиле */
+        .top-nav .container {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        /* ¬—≈ части мобильного меню Ч тоже с цветным фоном */
+        .top-nav .nav-menu,
+        .mobile-nav-menu,
+        .mobile-nav-menu-header,
+        .w-nav-overlay, /* webflow overlay */
+        .w-nav-menu { /* webflow desktop->mobile меню */
+            background: #1e6c68 !important;
+        }
+
+        /* Ќа вс€кий случай Ч убираем возможный Ђзазорї после шапки */
+        .top-nav + .hero-section,
+        .top-nav + main {
+            margin-top: 0;
+        }
+}
+
+/* ƒесктоп: пр€тать шапку при скролле вниз Ч оставл€ем как у теб€ */
+@media (min-width: 992px) {
+    .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1100;
+        background: transparent;
+        will-change: transform, opacity;
+        transition: transform .25s ease, opacity .25s ease;
+    }
+
+    html.scrolling-down .top-nav {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    html.scrolling-up .top-nav {
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}

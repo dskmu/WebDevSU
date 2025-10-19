@@ -1,0 +1,99 @@
+﻿
+@model WEBKA.Models.ContactForm
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Contact Mushy Pharmacy";
+}
+
+@section HeadExtra {
+    <meta name="description" content="Complete our form to contact us with any questions or concerns you may have about Mushy Pharmacy." />
+    <link rel="canonical" href="https://www.mushypharmacy.com/contact" />
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="w-layout-layout _5rem-margin-grid wf-layout-layout">
+            <div class="w-layout-cell column">
+                <h1 class="heading">Contact Us <span class="emphasized-heading">Today</span></h1>
+                <p>Complete our form to contact us with any questions or concerns you may have.</p>
+            </div>
+
+            <div class="w-layout-cell column">
+                <div class="form-block">
+
+                    @if (TempData["Result"] is string ok && !string.IsNullOrWhiteSpace(ok))
+                    {
+                        <div class="alert alert-success" role="alert">@ok</div>
+                    }
+
+                    <form asp-controller="Contact"
+                          asp-action="Index"
+                          method="post"
+                          novalidate
+                          class="contact-form"
+                          data-wf-ignore="true">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="w-layout-hflex horizontal-flex alert">
+                            <img src="@Url.Content("~/images/alert-20icon.svg")" width="25" alt="alert icon" loading="lazy" />
+                            <p class="red-text">Please do not enter any sensitive or medical information in this form</p>
+                        </div>
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                        <label asp-for="name" class="field-label"></label>
+                        <input asp-for="name"
+                               class="text-input w-input"
+                               maxlength="256"
+                               placeholder="Enter your first name" />
+
+                        <span asp-validation-for="name" class="text-danger"></span>
+
+                        <label asp-for="lastName" class="field-label"></label>
+                        <input asp-for="lastName"
+                               class="text-input w-input"
+                               maxlength="256"
+                               placeholder="Enter your last name" />
+
+                        <span asp-validation-for="lastName" class="text-danger"></span>
+
+                        <label asp-for="phone" class="field-label"></label>
+                        <input asp-for="phone"
+                               class="text-input w-input"
+                               type="tel"
+                               inputmode="tel"
+                               autocomplete="tel"
+                               maxlength="20"
+                               pattern="[0-9+\-\s\(\)]{7,20}"
+                               placeholder="Enter your phone number" />
+
+                        <span asp-validation-for="phone" class="text-danger"></span>
+
+                        <label asp-for="message" class="field-label"></label>
+                        <textarea asp-for="message"
+                                  class="text-input multiline w-input"
+                                  maxlength="1000"
+                                  placeholder="Enter your message here..."
+                                  rows="5"></textarea>
+
+                        <span asp-validation-for="message" class="text-danger"></span>
+
+                        <div class="w-layout-hflex horizontal-flex center-aligned">
+                            <p class="dark-text small-text">
+                                By clicking “Submit Form”, I agree to Mushy Pharmacy's
+                                <a asp-controller="Privacy" asp-action="Index" class="dark-text small-text">Privacy Policy</a>.
+                            </p>
+                            <button type="submit" class="primary-button red w-button">Submit Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

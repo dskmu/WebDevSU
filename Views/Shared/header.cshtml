@@ -1,0 +1,198 @@
+﻿<div class="top-nav w-nav"
+     role="banner"
+     data-animation="default"
+     data-collapse="none"
+     data-duration="400"
+     data-easing="ease"
+     data-easing2="ease">
+    <div class="container">
+        <img src="~/images/menu-20icon.svg"
+             class="menu-open"
+             alt=""
+             loading="lazy"
+             data-w-id="68e5d852-7ef2-55b0-62fd-e31830eb9725" />
+
+        <a href="~/" class="brand w-nav-brand">
+            <img src="~/images/mushy-20pharmacy-20logo-20-white-.svg"
+                 class="logo"
+                 width="140"
+                 alt="mushy pharmacy logo"
+                 loading="lazy"
+                 data-w-id="04e6998b-13e9-3c87-d6cc-87d72faf2f15" />
+        </a>
+
+        <div class="nav-menu" data-w-id="4d59df8e-39bc-117b-de2c-8f6cff6a8138">
+            <div class="mobile-nav-menu-header">
+                <img src="~/images/menu-20close-20icon.svg" class="menu-close" alt="" loading="lazy" />
+
+                <a href="~/" class="brand mobile-menu w-nav-brand">
+                    <img src="~/images/mushy-20pharmacy-20logo-20-white-.svg"
+                         class="logo"
+                         alt="mushy pharmacy logo"
+                         loading="lazy" />
+                </a>
+
+                <div class="button-container">
+                    <a href="~/contact" class="primary-button w-button">Contact Us</a>
+                </div>
+            </div>
+
+            <a href="~/" class="nav-link w-nav-link">Home</a>
+            <a href="~/about" class="nav-link w-nav-link">About</a>
+            <a href="~/location" class="nav-link w-nav-link">Location</a>
+            <a href="~/services" class="nav-link w-nav-link">Services</a>
+            <a href="~/insurance" class="nav-link w-nav-link">Insurance</a>
+            <a href="~/reviews" class="nav-link w-nav-link">Reviews</a>
+
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <span class="nav-link w-nav-link">@User.Identity!.Name</span>
+
+                <form asp-controller="Account" asp-action="Logout" method="post" class="inline-logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="primary-button">Logout</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="nav-link w-nav-link">Login</a>
+                <a asp-controller="Account" asp-action="Register" class="nav-link w-nav-link">Register</a>
+            }
+
+        </div>
+
+        <div class="mobile-nav-menu">
+            <div class="mobile-nav-menu-header">
+                <img src="~/images/menu-20close-20icon.svg" class="menu-close" alt="" loading="lazy" />
+                <a href="~/" class="brand mobile-menu w-nav-brand">
+                    <img src="~/images/mushy-20pharmacy-20logo-20-white-.svg"
+                         class="logo"
+                         alt="mushy pharmacy logo"
+                         loading="lazy" />
+                </a>
+                <div class="button-container">
+                    <a href="~/contact" class="primary-button w-button">Contact Us</a>
+                </div>
+            </div>
+
+            <!-- … существующие мобильные ссылки … -->
+            <a href="~/" class="nav-link w-nav-link">Home</a>
+            <a href="~/about" class="nav-link w-nav-link">About</a>
+            <a href="~/location" class="nav-link w-nav-link">Location</a>
+            <a href="~/services" class="nav-link w-nav-link">Services</a>
+            <a href="~/insurance" class="nav-link w-nav-link">Insurance</a>
+            <a href="~/reviews" class="nav-link w-nav-link">Reviews</a>
+
+            @* <<<<< ВСТАВИТЬ ВОТ ЭТО *@
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <span class="nav-link w-nav-link">@User.Identity!.Name</span>
+                <form asp-controller="Account" asp-action="Logout" method="post" class="inline-logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="nav-link w-nav-link as-link">Logout</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="nav-link w-nav-link">Login</a>
+                <a asp-controller="Account" asp-action="Register" class="nav-link w-nav-link">Register</a>
+            }
+
+        </div>
+
+        <div class="button-container" data-w-id="9fd8cda7-d7c6-8953-a4cb-fa13a3106f2c">
+            <a href="~/contact" class="primary-button w-button">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="floating-nav-bar">
+        <a href="~/" class="brand small w-nav-brand">
+            <img src="~/images/mushy-20pharmacy-20logo-20-white-.svg" class="logo-icon" width="32" height="30" alt="mushy pharmacy simple logo" loading="lazy" />
+        </a>
+
+        <a href="tel:(734)318-2609" class="cta-container w-inline-block">
+            <img src="~/images/phone.svg" alt="mushy pharmacy call now icon" loading="lazy" />
+            <div class="cta-text">(734) 318-2609</div>
+            <div class="tooltip-container call">
+                <div class="tooltip-arrow"></div>
+                <div class="tooltip-body"><p class="small-text">Click to call us!</p></div>
+            </div>
+        </a>
+
+        <div class="cta-container">
+            <div class="hours-embed w-embed w-script">
+                <div>
+                    <img id="status-image" src="" alt="Status Image" />
+                    <span id="hours-status" class="cta-text">Checking opening status...</span>
+                    <script>
+                        function updateOpeningStatus() {
+                            var openingStatusElement = document.getElementById("hours-status");
+                            var statusImageElement = document.getElementById("status-image");
+
+                            // Get the current date and time
+                            var now = new Date();
+                            var dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+                            var hour = now.getHours();
+
+                            // Define business hours
+                            var businessHours = {
+                                weekdays: { start: 9, end: 19 },
+                                friday: { morningStart: 9, morningEnd: 11.5, afternoonStart: 13, afternoonEnd: 19 },
+                                saturday: { start: 10, end: 15 }
+                            };
+
+                            // Check if the current time falls within business hours
+                            var isOpenNow = false;
+
+                            if (dayOfWeek >= 1 && dayOfWeek <= 4) {
+                                isOpenNow = hour >= businessHours.weekdays.start && hour < businessHours.weekdays.end;
+                            } else if (dayOfWeek === 5) {
+                                isOpenNow = (hour >= businessHours.friday.morningStart && hour < businessHours.friday.morningEnd) ||
+                                             (hour >= businessHours.friday.afternoonStart && hour < businessHours.friday.afternoonEnd);
+                            } else if (dayOfWeek === 6) {
+                                isOpenNow = hour >= businessHours.saturday.start && hour < businessHours.saturday.end;
+                            }
+
+                            // Update the opening status text and image
+                            if (isOpenNow) {
+                                openingStatusElement.textContent = "Open Now";
+                                statusImageElement.src = "images/opened.svg";
+                            } else {
+                                openingStatusElement.textContent = "Closed Now";
+                                statusImageElement.src = "images/closed.svg";
+                            }
+                        }
+
+                        // Call the function immediately after defining it
+                        updateOpeningStatus();
+
+                        // Set interval to update every 10 seconds
+                        setInterval(updateOpeningStatus, 10000);
+                    </script>
+
+                </div>
+            </div>
+            <div class="tooltip-container hours">
+                <div class="tooltip-arrow"></div>
+                <div class="tooltip-body">
+                    <p class="small-text">
+                        Monday - Thursday: 9am - 7pm<br /><br />
+                        Friday: 9am - 11:30am, 1pm-7pm<br /><br />
+                        Saturday: 10am - 3pm
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-container walk-ins">
+            <img src="~/images/walk-20ins.svg" alt="mushy pharmacy walk ins welcome icon" loading="lazy" />
+            <div class="cta-text">Walk-ins Welcome</div>
+            <div class="tooltip-container walk-ins">
+                <div class="tooltip-arrow"></div>
+                <div class="tooltip-body"><p class="small-text">Come on in, no appointment needed!</p></div>
+            </div>
+        </div>
+    </div>
+    </div>
+

@@ -1,0 +1,52 @@
+﻿
+@model WEBKA.Models.RegisterVm
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create account";
+}
+
+<section class="hero-section auth-page">
+    <div class="container">
+        <div class="w-layout-layout _5rem-margin-grid wf-layout-layout">
+            <div class="w-layout-cell column">
+                <h1 class="heading">Create <span class="emphasized-heading">Account</span></h1>
+                <p>Register to access protected features.</p>
+            </div>
+
+            <div class="w-layout-cell column">
+                <div class="form-block w-form">
+                    <form asp-action="Register" method="post" class="contact-form" novalidate>
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <label asp-for="FirstName" class="field-label"></label>
+                        <input asp-for="FirstName" class="text-input w-input" maxlength="100" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        <label asp-for="LastName" class="field-label"></label>
+                        <input asp-for="LastName" class="text-input w-input" maxlength="100" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                        <label asp-for="Email" class="field-label"></label>
+                        <input asp-for="Email" class="text-input w-input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                        <label asp-for="Password" class="field-label"></label>
+                        <input asp-for="Password" class="text-input w-input" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                        <label asp-for="ConfirmPassword" class="field-label"></label>
+                        <input asp-for="ConfirmPassword" class="text-input w-input" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                        <div class="w-layout-hflex horizontal-flex center-aligned">
+                            <button type="submit" class="primary-button red w-button">Create account</button>
+                        </div>
+                    </form>
+                    <div class="w-form-done"><div>Success!</div></div>
+                    <div class="w-form-fail"><div>Something went wrong.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
